@@ -18,6 +18,9 @@ contract SimpleStorage {
     // Create empty  public dynamic array
     Person[] public listOfPeople;
     
+    // mapping every string/name to one number 
+    mapping(string => uint256) public nameToFavoriteNumber;
+
     //static array (up to 3) 
     //Person[3] public listOfPeople;
 
@@ -37,8 +40,20 @@ contract SimpleStorage {
         return myfavoriteNumber;
     }
     // Creating addPerson public function that can add pereson to listOfPeople array
+    // calldata - temporary memory, variable can't be modified
+    // memory - temporary memory, variable can be modified 
+    // storage - permament memory, can't be modified 
+    // Since string is an array of bytes, you have to tell solidity where to store the value
+    // Solidity needs  to be told where to store structs , mappings, and arrays
     function addPerson(string memory _name, uint256 _favoriteNumber) public {
+        // Adds someone to array listOfPeople
         listOfPeople.push(Person(_favoriteNumber, _name));
+        // Add somebody to nameToFavoriteNumber mapping
+        nameToFavoriteNumber[_name] = _favoriteNumber;
     }
+
+
+
+
 
 } 
